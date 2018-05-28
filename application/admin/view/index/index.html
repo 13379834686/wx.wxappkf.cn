@@ -1,0 +1,104 @@
+﻿{include file="public/meta" /}
+
+
+	<title>后台首页</title>
+	<meta name="keywords" content="###">
+	<meta name="description" content="###">
+</head>
+<body>
+{include file="public/header"/}
+{include file="public/menu"/}
+<!--content-->
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont"></i> <a href="/" class="maincolor">首页</a>
+		<span class="c-999 en">&gt;</span>
+		<span class="c-666">我的桌面</span>
+		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<p>上次登录IP：<?php echo session('login_ip_info')?>  上次登录时间：<?php echo session('login_time_info')?> </p>
+			<table class="table table-border table-bordered table-bg">
+				<thead>
+				<tr>
+					<th colspan="7" scope="col">信息统计</th>
+				</tr>
+				<tr class="text-c">
+					<th>统计</th>
+					<th>资讯库</th>
+					<th>图片库</th>
+					<th>产品库</th>
+					<th>用户</th>
+					<th>管理员</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr class="text-c">
+					<td>总数</td>
+					<td>92</td>
+					<td>9</td>
+					<td>0</td>
+					<td>8</td>
+					<td>20</td>
+				</tr>
+				<tr class="text-c">
+					<td>今日</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+				</tr>
+				<tr class="text-c">
+					<td>昨日</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+				</tr>
+				<tr class="text-c">
+					<td>本周</td>
+					<td>2</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+				</tr>
+				<tr class="text-c">
+					<td>本月</td>
+					<td>2</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+				</tr>
+				</tbody>
+			</table>
+
+		</article>
+	</div>
+</section>
+<!--content-->
+
+{include file="public/footer" /}
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+
+<!--此乃百度统计代码，请自行删除-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!--/此乃百度统计代码，请自行删除-->
+</body>
+</html>
