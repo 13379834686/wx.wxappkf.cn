@@ -17,6 +17,7 @@ class Admin extends Common
     public function index(){
 
 
+        
         $count = Db::table('admin')->count();
         $lis = Db::table('admin')->select();
 
