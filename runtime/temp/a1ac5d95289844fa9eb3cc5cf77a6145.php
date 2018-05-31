@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:77:"F:\phpstudy\PHPTutorial\WWW\public/../application/admin\view\admin\index.html";i:1523257270;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\meta.html";i:1521453044;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\header.html";i:1522047570;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\menu.html";i:1523257176;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\footer.html";i:1521443164;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:77:"F:\phpstudy\PHPTutorial\WWW\public/../application/admin\view\admin\index.html";i:1527736649;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\meta.html";i:1521453044;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\header.html";i:1522047570;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\menu.html";i:1527516685;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\footer.html";i:1521443164;}*/ ?>
 ﻿<!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
@@ -122,8 +122,8 @@
             <dd>
                 <ul>
                     <li><a href="<?php echo url('admin/index'); ?>" title="管理员列表">管理员列表</a></li>
-                    <!--<li><a href="admin-role.html" title="角色管理">角色管理</a></li>-->
-                    <!--<li><a href="admin-permission.html" title="权限管理">权限管理</a></li>-->
+                    <li><a href="<?php echo url('auth_group/index'); ?>" title="用户列表">用户列表</a></li>
+                    <li><a href="<?php echo url('auth_rule/index'); ?>" title="权限列表">权限列表</a></li>
 
                 </ul>
             </dd>
@@ -171,10 +171,10 @@
 
 			<div class="cl pd-5 bg-1 bk-gray mt-20">
                 <span class="l">
-                    <!--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>-->
+
                     <a href="javascript:;" onclick="admin_add('添加管理员','<?php echo url('admin/add'); ?>','650','400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a> </span>
-				<!--<span class="r">共有数据：<strong>54</strong> 条</span>-->
-				<span class="r">共有数据：<?php echo $count; ?> 条</span>
+
+
 			</div>
 			<table class="table table-border table-bordered table-bg">
 				<thead>
@@ -185,10 +185,11 @@
 
 					<th width="40">ID</th>
 					<th width="150">登录名</th>
+					<th width="100">所属用户</th>
 
-					<th>角色</th>
-					<th width="130">注册日期</th>
-					<th width="100">状态</th>
+					<th width="100">上一次登录日期</th>
+					<th width="100">上一次登录IP</th>
+					<th width="50">状态</th>
 					<th width="100">操作</th>
 				</tr>
 				</thead>
@@ -198,14 +199,10 @@
 				<tr class="text-c">
 					<td><?php echo $v['id']; ?></td>
 					<td><?php echo $v['adminname']; ?></td>
+					<td><?php echo $v['groupTitle']; ?></td>
 
-					<?php if($v['roleid'] == 0): ?>
-					<td>超级管理员</td>
-					<?php else: ?>
-					<td>普通理员</td>
-					<?php endif; ?>
-
-					<td><?php echo date("Y-m-d",$v['createtime']); ?></td>
+					<td><?php echo date("Y-m-d",$v['logintime']); ?></td>
+					<td><?php echo $v['loginip']; ?></td>
 					<?php if($v['status'] == 1): ?>
 					<td class="td-status"><span class="label label-success radius">启用</span></td>
 					<?php else: ?>
@@ -222,6 +219,16 @@
 				<?php endforeach; endif; else: echo "" ;endif; ?>
 				</tbody>
 			</table>
+			<style>
+				.pagination li{
+					float: left;
+					text-align: center;
+					margin:10px 1px 0 1px;
+					padding:2px 10px 2px 10px;
+					border: 1px solid #ddd;
+				}
+			</style>
+			<?php echo $lis->render(); ?>
 		</article>
 	</div>
 </section>

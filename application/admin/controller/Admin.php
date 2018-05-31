@@ -9,18 +9,25 @@
 namespace app\admin\controller;
 
 use app\admin\validate\Adminval;
+use app\admin\model\Admin as Admins;
 use think\Db;
+use think\Loader;
 use think\Request;
 
 class Admin extends Common
 {
     public function index(){
-        
-        $count = Db::table('admin')->count();
-        $lis = Db::table('admin')->select();
 
+        $auth = new Auth();
+        $admin=new Admins();
+        $lis=$admin->getadmin();
+
+        foreach ($lis as $k => $v) {
+            $_groupTitle=$auth->getGroups($v['id']);
+            $groupTitle=$_groupTitle[0]['title'];
+            $v['groupTitle']=$groupTitle;
+        }
         $this->assign('lis',$lis);
-        $this->assign('count',$count);
         return $this->fetch();
 
     }
@@ -29,30 +36,23 @@ class Admin extends Common
 
     public function add(){
         if(request()->isPost()){
-            if (input('adminpass')==null || input('adminpass')!=input('repassword')){
-                dump('密码不能为空或不一致');
-                exit;
-            }
-            $data = [
-                'adminname' => input('adminname'),
-                'adminpass' => md5(input('adminpass')),
-                'status' => input('status'),
-                'roleid' => input('roleid'),
-                'createtime' => time(),
-            ];
-            $validate = new Adminval();
-            if ($validate->scene('add')->check($data)){
-                $info = Db::table('admin')->insert($data);
-                if ($info){
+            $data = input('post.');
+            $admin = new Admins;
+            $validate = Loader::validate('Adminval');
+            if(!$validate->scene('add')->check($data)){
+                dump($validate->getError());
+            }else{
+                $add = $admin->addAdmin($data);
+                if ($add){
                     $this->success('添加成功');
                 }else{
                     $this->error('添加失败');
                 }
-            }else{
-                dump ($validate->getError());
+                return;
             }
-
         }
+        $authGroupRes = Db::table('auth_group')->select();
+        $this->assign('authGroupRes',$authGroupRes);
         return $this->fetch();
     }
 
@@ -61,21 +61,15 @@ class Admin extends Common
 
     public function updata($id){
         $id = input('id');
-        $lis = Db::table('admin')->where('id',$id)->find();
+        $lis = db('admin')->where('id',$id)->find();
         if (request()->isPost()){
-            if (input('adminpass')==null || input('adminpass')!=input('repassword')){
-                dump('密码不能为空或不一致');
-                exit;
-            }
-            $data = [
-                'adminname' => input('adminname'),
-                'adminpass' => md5(input('adminpass')),
-                'status' => input('status'),
-                'roleid' => input('roleid'),
-            ];
+            $data = input('post.');
+            $data['adminpass'] = md5($data['adminpass']);
+            $data['createtime'] = time();
             $validate = new Adminval();
             if ($validate->scene('edit')->check($data)){
-                $info = Db::table('admin')->where('id',$id)->update($data);
+                $info = db('admin')->where('id',$id)->update($data);
+                db('auth_group_access')->where('uid',$id)->update(array('group_id'=>input('group_id')));
                 if ($info){
                     $this->success('编辑成功');
                 }else{
@@ -84,12 +78,15 @@ class Admin extends Common
             }else{
                 dump ($validate->getError());
             }
-
         }
-
-        $this->assign('lis',$lis);
+        $authGroupAccess = db('auth_group_access')->where('uid',$id)->find();
+        $authGroupRes = db('auth_group')->select();
+        $this->assign([
+            'lis'=>$lis,
+            'authGroupRes'=>$authGroupRes,
+            'groupId'=>$authGroupAccess['group_id'],
+        ]);
         return $this->fetch('edit');
-
     }
 
     public function del(Request $request){

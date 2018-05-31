@@ -1,5 +1,5 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:80:"/www/wwwroot/blog.wxappkf.cn/public/../application/admin/view/parameter/add.html";i:1523259286;s:68:"/www/wwwroot/blog.wxappkf.cn/application/admin/view/public/meta.html";i:1521453044;s:70:"/www/wwwroot/blog.wxappkf.cn/application/admin/view/public/footer.html";i:1521443164;}*/ ?>
-<!--_meta 作为公共模版分离出去-->
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:79:"F:\phpstudy\PHPTutorial\WWW\public/../application/admin\view\auth_rule\add.html";i:1527559924;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\meta.html";i:1521453044;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\footer.html";i:1521443164;}*/ ?>
+﻿<!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -25,39 +25,36 @@
     <![endif]-->
     <!--/meta 作为公共模版分离出去-->
 
-<title>添加管理员 - 管理员管理 - H-ui.admin v3.0</title>
-<meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
-<meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+	<title>添加权限</title>
+	<meta name="keywords" content="##">
+	<meta name="description" content="##">
 </head>
 <body>
 <article class="cl pd-20">
 	<form action="" method="post" class="form form-horizontal" id="form-admin-add">
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>appid：</label>
+		<label class="form-label col-xs-4 col-sm-3">上级权限：</label>
+		<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:200px;">
+		<select class="select" name="pid" size="1">
+		<option value="0">顶级权限</option>
+			<?php if(is_array($authRuleRes) || $authRuleRes instanceof \think\Collection || $authRuleRes instanceof \think\Paginator): if( count($authRuleRes)==0 ) : echo "" ;else: foreach($authRuleRes as $key=>$vo): ?>
+		<option value="<?php echo $vo['id']; ?>"><?php if($vo['level']!=0){echo '|';} echo str_repeat('—',$vo['level']*2) ?><?php echo $vo['title']; ?></option>
+			<?php endforeach; endif; else: echo "" ;endif; ?>
+		</select>
+		</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权限名称：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" required class="input-text" value="" placeholder="" id="appid" name="appid">
+				<input type="text" class="input-text" value="" placeholder="" id="title" name="title">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>appsecret：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权限地址：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" required class="input-text" autocomplete="off" value="" placeholder="" id="appsecret" name="appsecret">
+				<input type="text" class="input-text" value="" placeholder="" id="name" name="name">
 			</div>
 		</div>
-
-		<!--<div class="row cl">-->
-			<!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>url：</label>-->
-			<!--<div class="formControls col-xs-8 col-sm-9">-->
-				<!--<input type="text" required class="input-text" value="" placeholder="" id="url" name="url">-->
-			<!--</div>-->
-		<!--</div>-->
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>redirect_uri：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" required class="input-text" placeholder="" name="redirect_uri" id="redirect_uri">
-			</div>
-		</div>
-
 
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
@@ -66,7 +63,6 @@
 		</div>
 	</form>
 </article>
-
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="/static/admin/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="/static/admin/lib/layer/2.4/layer.js"></script>
@@ -78,7 +74,6 @@
 <script type="text/javascript" src="/static/admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 <script type="text/javascript" src="/static/admin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="/static/admin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
-
 
 <!--/请在上方写此页面业务相关的脚本-->
 </body>

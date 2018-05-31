@@ -1,0 +1,96 @@
+﻿{include file="public/meta"/}
+
+<title>权限列表</title>
+<meta name="keywords" content="###">
+<meta name="description" content="##">
+</head>
+<body>
+{include file="public/header"/}
+{include file="public/menu"/}
+
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 权限列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<form action="" method="post">
+		<article class="cl pd-20">
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+				<a href="javascript:;" onclick="admin_permission_add('添加权限','{:url(\'auth_rule/add\')}','','310')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加权限</a></span>
+				&nbsp;
+				<input type="submit" value="排序" class="btn btn-primary radius">
+			</div>
+
+
+			<table class="table table-border table-bordered table-bg">
+				<thead>
+					<tr>
+						<th scope="col" colspan="7">权限节点</th>
+					</tr>
+					<tr class="text-c">
+
+						<th width="40">ID</th>
+						<th width="100">排序</th>
+						<th width="200">权限名称</th>
+						<th>权限地址</th>
+						<th>级别</th>
+						<th width="100">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					{foreach name="authRuleRes" id="vo"}
+					<tr>
+
+						<td class="text-c">{$vo.id}</td>
+						<td class="text-c"><input name="{$vo.id}" type="text" value="{$vo.sort}" style=" text-align: center; width: 20%;"></td>
+						<td><?php if($vo['level']!=0){echo '|';} echo str_repeat('—',$vo['level']*3) ?>{$vo.title}</td>
+						<td>{$vo.name}</td>
+						<td class="text-c">{$vo.level+1}级</td>
+						<td class="text-c">
+							<a title="编辑" href="javascript:;" onclick="admin_permission_edit('权限编辑','{:url('auth_rule/edit',array('id'=>$vo.id))}','1','','310')" class="ml-5" style="text-decoration:none">修改</a>
+							<a title="删除" href="javascript:;" onclick="admin_permission_del(this,'{$vo.id}')" class="ml-5" style="text-decoration:none">删除</a>
+						</td>
+					</tr>
+					{/foreach}
+				</tbody>
+			</table>
+
+		</article>
+		</form>
+	</div>
+</section>
+{include file="public/footer"/}
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__STATIC__/admin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+/*
+	参数解释：
+	title	标题
+	url		请求的url
+	id		需要操作的数据id
+	w		弹出层宽度（缺省调默认值）
+	h		弹出层高度（缺省调默认值）
+*/
+/*管理员-权限-添加*/
+function admin_permission_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-权限-编辑*/
+function admin_permission_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
+
+/*管理员-权限-删除*/
+function admin_permission_del(obj,id){
+	layer.confirm('角色删除须谨慎，确认要删除吗？',function(index){
+	    $.post("{:url('auth_rule/del')}",{id:id});
+		$(obj).parents("tr").remove();
+		layer.msg('已删除!',{icon:1,time:1000});
+	});
+}
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

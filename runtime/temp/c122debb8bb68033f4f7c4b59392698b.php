@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:80:"/www/wwwroot/wx.wxappkf.cn/public/../application/admin/view/parameter/index.html";i:1523260468;s:66:"/www/wwwroot/wx.wxappkf.cn/application/admin/view/public/meta.html";i:1521453044;s:68:"/www/wwwroot/wx.wxappkf.cn/application/admin/view/public/header.html";i:1522047570;s:66:"/www/wwwroot/wx.wxappkf.cn/application/admin/view/public/menu.html";i:1523257176;s:68:"/www/wwwroot/wx.wxappkf.cn/application/admin/view/public/footer.html";i:1521443164;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:82:"F:\phpstudy\PHPTutorial\WWW\public/../application/admin\view\auth_group\index.html";i:1527515613;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\meta.html";i:1521453044;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\header.html";i:1522047570;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\menu.html";i:1527516685;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\footer.html";i:1521443164;}*/ ?>
 ﻿<!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
@@ -24,10 +24,9 @@
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <!--/meta 作为公共模版分离出去-->
-
-<title>微信管理</title>
-<meta name="keywords" content="#">
-<meta name="description" content="#">
+	<title>用户列表</title>
+	<meta name="keywords" content="##">
+	<meta name="description" content="##">
 </head>
 <body>
 <!--_header 作为公共模版分离出去-->
@@ -121,8 +120,8 @@
             <dd>
                 <ul>
                     <li><a href="<?php echo url('admin/index'); ?>" title="管理员列表">管理员列表</a></li>
-                    <!--<li><a href="admin-role.html" title="角色管理">角色管理</a></li>-->
-                    <!--<li><a href="admin-permission.html" title="权限管理">权限管理</a></li>-->
+                    <li><a href="<?php echo url('auth_group/index'); ?>" title="用户列表">用户列表</a></li>
+                    <li><a href="<?php echo url('auth_rule/index'); ?>" title="权限列表">权限列表</a></li>
 
                 </ul>
             </dd>
@@ -160,51 +159,60 @@
 
 
 <section class="Hui-article-box">
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
-		<span class="c-gray en">&gt;</span>
-		微信管理
-		<span class="c-gray en">&gt;</span>
-		微信列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 用户列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
-
-			<div class="cl pd-5 bg-1 bk-gray mt-20">
-				<span class="l">
-					<a href="javascript:;" onclick="admin_add('添加微信数据','<?php echo url('parameter/add'); ?>','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加微信数据</a> </span>
-
-			</div>
-			<table class="table table-border table-bordered table-bg">
-				<thead>
-
+			<div class="cl pd-5 bg-1 bk-gray"> <span class="l">
+				<a class="btn btn-primary radius" href="javascript:;" onclick="admin_role_add('添加用户组','<?php echo url('auth_group/add'); ?>','800')"><i class="Hui-iconfont">&#xe600;</i> 添加用户组</a> </span>
+				<span class="r">共有数据：<strong>54</strong> 条</span> </div>
+			<div class="mt-10">
+				<table class="table table-border table-bordered table-hover table-bg">
+					<thead>
+					<tr>
+						<th scope="col" colspan="6">角色管理</th>
+					</tr>
 					<tr class="text-c">
+						<th width="25"><input type="checkbox" value="" name=""></th>
 						<th width="40">ID</th>
-						<th width="150">微信appid</th>
-						<th width="90">微信appsecret</th>
-						<th width="150">回调redirecturi</th>
+						<th>用户组名称</th>
+						<th width="200">启用状态</th>
 
-
-						<th width="100">操作</th>
+						<th width="70">操作</th>
 					</tr>
-				</thead>
-				<tbody>
-				<?php if(is_array($lis) || $lis instanceof \think\Collection || $lis instanceof \think\Paginator): if( count($lis)==0 ) : echo "" ;else: foreach($lis as $key=>$vo): ?>
+					</thead>
+					<tbody>
+					<?php if(is_array($authGroupRes) || $authGroupRes instanceof \think\Collection || $authGroupRes instanceof \think\Paginator): if( count($authGroupRes)==0 ) : echo "" ;else: foreach($authGroupRes as $key=>$vo): ?>
 					<tr class="text-c">
+						<td><input type="checkbox" value="" name=""></td>
 						<td><?php echo $vo['id']; ?></td>
-						<td><?php echo $vo['appid']; ?></td>
-						<td><?php echo $vo['appsecret']; ?></td>
-						<td><?php echo $vo['redirect_uri']; ?></td>
-						<td class="td-manage">
-
-							<a title="编辑" href="javascript:;" onclick="admin_edit('微信编辑','<?php echo url('parameter/edit',array('id'=>$vo['id'])); ?>','1','800','500')" class="ml-5" style="text-decoration:none">编辑</a>
-							<a title="删除" href="javascript:;" onclick="admin_del(this,'<?php echo $vo['id']; ?>')" class="ml-5" style="text-decoration:none">删除</a></td>
+						<td><?php echo $vo['title']; ?></td>
+						<?php if($vo['status'] == 1): ?>
+						<td class="td-status"><span class="label label-success radius">启用</span></td>
+						<?php else: ?>
+						<td class="td-status"><span class="label label-error radius">停用</span></td>
+						<?php endif; ?>
+						<td class="f-14">
+							<a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','<?php echo url('auth_group/edit',array('id'=>$vo['id'])); ?>','1')" style="text-decoration:none">修改</a>
+							<a title="删除" href="javascript:;" onclick="admin_role_del(this,'<?php echo $vo['id']; ?>')" class="ml-5" style="text-decoration:none">删除</a></td>
 					</tr>
-				<?php endforeach; endif; else: echo "" ;endif; ?>
-				</tbody>
-			</table>
+					<?php endforeach; endif; else: echo "" ;endif; ?>
+
+					</tbody>
+				</table>
+			</div>
+			<style>
+				.pagination li{
+					float: left;
+					text-align: center;
+					margin:10px 1px 0 1px;
+					padding:2px 10px 2px 10px;
+					border: 1px solid #ddd;
+				}
+			</style>
+			<?php echo $authGroupRes->render(); ?>
 		</article>
 	</div>
 </section>
-
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="/static/admin/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="/static/admin/lib/layer/2.4/layer.js"></script>
@@ -212,60 +220,30 @@
 <script type="text/javascript" src="/static/admin/h-ui.admin/js/H-ui.admin.page.js"></script>
 <!--/_footer /作为公共模版分离出去-->
 
-<!--请在下方写此页面业务相关的脚本--> 
+<!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="/static/admin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="/static/admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/static/admin/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
-/*
-	参数解释：
-	title	标题
-	url		请求的url
-	id		需要操作的数据id
-	w		弹出层宽度（缺省调默认值）
-	h		弹出层高度（缺省调默认值）
-*/
-/*管理员-增加*/
-function admin_add(title,url,w,h){
-	layer_show(title,url,w,h);
-}
-/*管理员-删除*/
-function admin_del(obj,id){
-	layer.confirm('确认要删除吗？',function(index){
-		//此处请求后台程序，下方是成功后的前台处理……
-		$.post('<?php echo url("parameter/del"); ?>',{id:id});
-		$(obj).parents("tr").remove();
-		layer.msg('已删除!',{icon:1,time:1000});
-	});
-}
-/*管理员-编辑*/
-function admin_edit(title,url,id,w,h){
-	layer_show(title,url,w,h);
-}
-/*管理员-停用*/
-function admin_stop(obj,id){
-	layer.confirm('确认要停用吗？',function(index){
-		//此处请求后台程序，下方是成功后的前台处理……
-		
-		$(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_start(this,id)" href="javascript:;" title="启用" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">已禁用</span>');
-		$(obj).remove();
-		layer.msg('已停用!',{icon: 5,time:1000});
-	});
-}
+    /*管理员-角色-添加*/
+    function admin_role_add(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+    /*管理员-角色-编辑*/
+    function admin_role_edit(title,url,id,w,h){
+        layer_show(title,url,w,h);
+    }
 
-/*管理员-启用*/
-function admin_start(obj,id){
-	layer.confirm('确认要启用吗？',function(index){
-		//此处请求后台程序，下方是成功后的前台处理……
-		
-		$(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_stop(this,id)" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-		$(obj).remove();
-		layer.msg('已启用!', {icon: 6,time:1000});
-	});
-}
-</script> 
+    /*管理员-角色-删除*/
+    function admin_role_del(obj,id){
+        layer.confirm('角色删除须谨慎，确认要删除吗？',function(index){
+            //此处请求后台程序，下方是成功后的前台处理……
+            $.post("<?php echo url('auth_group/del'); ?>",{id:id});
+            $(obj).parents("tr").remove();
+            layer.msg('已删除!',{icon:1,time:1000});
+        });
+    }
+</script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:76:"/www/wwwroot/wx.wxappkf.cn/public/../application/admin/view/index/index.html";i:1522749186;s:66:"/www/wwwroot/wx.wxappkf.cn/application/admin/view/public/meta.html";i:1521453044;s:68:"/www/wwwroot/wx.wxappkf.cn/application/admin/view/public/header.html";i:1522047570;s:66:"/www/wwwroot/wx.wxappkf.cn/application/admin/view/public/menu.html";i:1523257176;s:68:"/www/wwwroot/wx.wxappkf.cn/application/admin/view/public/footer.html";i:1521443164;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:81:"F:\phpstudy\PHPTutorial\WWW\public/../application/admin\view\auth_rule\index.html";i:1527557807;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\meta.html";i:1521453044;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\header.html";i:1522047570;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\menu.html";i:1527516685;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\footer.html";i:1521443164;}*/ ?>
 ﻿<!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
@@ -25,10 +25,9 @@
     <![endif]-->
     <!--/meta 作为公共模版分离出去-->
 
-
-	<title>后台首页</title>
-	<meta name="keywords" content="###">
-	<meta name="description" content="###">
+<title>权限列表</title>
+<meta name="keywords" content="###">
+<meta name="description" content="##">
 </head>
 <body>
 <!--_header 作为公共模版分离出去-->
@@ -122,8 +121,8 @@
             <dd>
                 <ul>
                     <li><a href="<?php echo url('admin/index'); ?>" title="管理员列表">管理员列表</a></li>
-                    <!--<li><a href="admin-role.html" title="角色管理">角色管理</a></li>-->
-                    <!--<li><a href="admin-permission.html" title="权限管理">权限管理</a></li>-->
+                    <li><a href="<?php echo url('auth_group/index'); ?>" title="用户列表">用户列表</a></li>
+                    <li><a href="<?php echo url('auth_rule/index'); ?>" title="权限列表">权限列表</a></li>
 
                 </ul>
             </dd>
@@ -159,78 +158,57 @@
 <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
 <!--/_menu 作为公共模版分离出去-->
 
-<!--content-->
+
 <section class="Hui-article-box">
-	<nav class="breadcrumb"><i class="Hui-iconfont"></i> <a href="/" class="maincolor">首页</a>
-		<span class="c-999 en">&gt;</span>
-		<span class="c-666">我的桌面</span>
-		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 权限列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
+		<form action="" method="post">
 		<article class="cl pd-20">
-			<p>上次登录IP：<?php echo session('login_ip_info')?>  上次登录时间：<?php echo session('login_time_info')?> </p>
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+				<a href="javascript:;" onclick="admin_permission_add('添加权限','<?php echo url('auth_rule/add'); ?>','','310')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加权限</a></span>
+				&nbsp;
+				<input type="submit" value="排序" class="btn btn-primary radius">
+			</div>
+
+
 			<table class="table table-border table-bordered table-bg">
 				<thead>
-				<tr>
-					<th colspan="7" scope="col">信息统计</th>
-				</tr>
-				<tr class="text-c">
-					<th>统计</th>
-					<th>资讯库</th>
-					<th>图片库</th>
-					<th>产品库</th>
-					<th>用户</th>
-					<th>管理员</th>
-				</tr>
+					<tr>
+						<th scope="col" colspan="7">权限节点</th>
+					</tr>
+					<tr class="text-c">
+
+						<th width="40">ID</th>
+						<th width="100">排序</th>
+						<th width="200">权限名称</th>
+						<th>权限地址</th>
+						<th>级别</th>
+						<th width="100">操作</th>
+					</tr>
 				</thead>
 				<tbody>
-				<tr class="text-c">
-					<td>总数</td>
-					<td>92</td>
-					<td>9</td>
-					<td>0</td>
-					<td>8</td>
-					<td>20</td>
-				</tr>
-				<tr class="text-c">
-					<td>今日</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr class="text-c">
-					<td>昨日</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr class="text-c">
-					<td>本周</td>
-					<td>2</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr class="text-c">
-					<td>本月</td>
-					<td>2</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
+					<?php if(is_array($authRuleRes) || $authRuleRes instanceof \think\Collection || $authRuleRes instanceof \think\Paginator): if( count($authRuleRes)==0 ) : echo "" ;else: foreach($authRuleRes as $key=>$vo): ?>
+					<tr>
+
+						<td class="text-c"><?php echo $vo['id']; ?></td>
+						<td class="text-c"><input name="<?php echo $vo['id']; ?>" type="text" value="<?php echo $vo['sort']; ?>" style=" text-align: center; width: 20%;"></td>
+						<td><?php if($vo['level']!=0){echo '|';} echo str_repeat('—',$vo['level']*3) ?><?php echo $vo['title']; ?></td>
+						<td><?php echo $vo['name']; ?></td>
+						<td class="text-c"><?php echo $vo['level']+1; ?>级</td>
+						<td class="text-c">
+							<a title="编辑" href="javascript:;" onclick="admin_permission_edit('权限编辑','<?php echo url('auth_rule/edit',array('id'=>$vo['id'])); ?>','1','','310')" class="ml-5" style="text-decoration:none">修改</a>
+							<a title="删除" href="javascript:;" onclick="admin_permission_del(this,'<?php echo $vo['id']; ?>')" class="ml-5" style="text-decoration:none">删除</a>
+						</td>
+					</tr>
+					<?php endforeach; endif; else: echo "" ;endif; ?>
 				</tbody>
 			</table>
 
 		</article>
+		</form>
 	</div>
 </section>
-<!--content-->
-
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="/static/admin/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="/static/admin/lib/layer/2.4/layer.js"></script>
@@ -238,23 +216,37 @@
 <script type="text/javascript" src="/static/admin/h-ui.admin/js/H-ui.admin.page.js"></script>
 <!--/_footer /作为公共模版分离出去-->
 
-
 <!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/admin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
+/*
+	参数解释：
+	title	标题
+	url		请求的url
+	id		需要操作的数据id
+	w		弹出层宽度（缺省调默认值）
+	h		弹出层高度（缺省调默认值）
+*/
+/*管理员-权限-添加*/
+function admin_permission_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-权限-编辑*/
+function admin_permission_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
 
+/*管理员-权限-删除*/
+function admin_permission_del(obj,id){
+	layer.confirm('角色删除须谨慎，确认要删除吗？',function(index){
+	    $.post("<?php echo url('auth_rule/del'); ?>",{id:id});
+		$(obj).parents("tr").remove();
+		layer.msg('已删除!',{icon:1,time:1000});
+	});
+}
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
-
-<!--此乃百度统计代码，请自行删除-->
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-<!--/此乃百度统计代码，请自行删除-->
 </body>
 </html>

@@ -1,0 +1,98 @@
+﻿{include file="public/meta"/}
+	<title>编辑权限</title>
+	<meta name="keywords" content="##">
+	<meta name="description" content="##">
+</head>
+<body>
+<article class="cl pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-admin-add">
+		<input type="hidden" name="id" value="{$authRules.id}">
+		<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3">上级权限：</label>
+		<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:200px;">
+		<select class="select" name="pid" size="1">
+		<option value="0">顶级权限</option>
+			{foreach name="authRuleRes" id="vo"}
+		<option {if condition="$authRules['pid'] eq $vo['id']"} selected="selected" {/if} value="{$vo.id}"><?php if($vo['level']!=0){echo '|';} echo str_repeat('—',$vo['level']*2) ?>{$vo.title}</option>
+			{/foreach}
+		</select>
+		</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权限名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$authRules.title}" placeholder="" id="title" name="title">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权限地址：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$authRules.name}" placeholder="" id="name" name="name">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+{include file="public/footer"/}
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__STATIC__/admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $("#form-admin-add").validate({
+            rules:{
+                adminName:{
+                    required:true,
+                    minlength:4,
+                    maxlength:16
+                },
+                password:{
+                    required:true,
+                },
+                password2:{
+                    required:true,
+                    equalTo: "#password"
+                },
+                sex:{
+                    required:true,
+                },
+                phone:{
+                    required:true,
+                    isPhone:true,
+                },
+                email:{
+                    required:true,
+                    email:true,
+                },
+                adminRole:{
+                    required:true,
+                },
+            },
+            onkeyup:false,
+            focusCleanup:true,
+            success:"valid",
+            submitHandler:function(form){
+                $(form).ajaxSubmit();
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.$('.btn-refresh').click();
+                parent.layer.close(index);
+            }
+        });
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

@@ -44,4 +44,30 @@ class Admin extends Model
 
     }
 
+    public function addAdmin($data){
+        if (empty($data) || !is_array($data)){
+            return false;
+        }
+        if ($data['adminpass']){
+            $data['adminpass'] = md5($data['adminpass']);
+            $data['createtime'] = time();
+        }
+
+        $addData = array();
+        $addData['adminname'] = $data['adminname'];
+        $addData['adminpass'] = $data['adminpass'];
+        if ($this->save($addData)){
+            $authGroupAccess['uid']=$this->id;
+            $authGroupAccess['group_id']=$data['group_id'];
+            db('auth_group_access')->insert($authGroupAccess);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getadmin(){
+        return $this::paginate(2,false);
+    }
+
 }

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:81:"F:\phpstudy\PHPTutorial\WWW\public/../application/admin\view\parameter\index.html";i:1523260468;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\meta.html";i:1521453044;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\header.html";i:1522047570;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\menu.html";i:1523257176;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\footer.html";i:1521443164;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:81:"F:\phpstudy\PHPTutorial\WWW\public/../application/admin\view\parameter\index.html";i:1523260468;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\meta.html";i:1521453044;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\header.html";i:1522047570;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\menu.html";i:1527516685;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\footer.html";i:1521443164;}*/ ?>
 ﻿<!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
@@ -121,8 +121,8 @@
             <dd>
                 <ul>
                     <li><a href="<?php echo url('admin/index'); ?>" title="管理员列表">管理员列表</a></li>
-                    <!--<li><a href="admin-role.html" title="角色管理">角色管理</a></li>-->
-                    <!--<li><a href="admin-permission.html" title="权限管理">权限管理</a></li>-->
+                    <li><a href="<?php echo url('auth_group/index'); ?>" title="用户列表">用户列表</a></li>
+                    <li><a href="<?php echo url('auth_rule/index'); ?>" title="权限列表">权限列表</a></li>
 
                 </ul>
             </dd>

@@ -1,4 +1,29 @@
-{include file="public/meta" /}
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:76:"F:\phpstudy\PHPTutorial\WWW\public/../application/admin\view\admin\edit.html";i:1527724702;s:67:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\meta.html";i:1521453044;s:69:"F:\phpstudy\PHPTutorial\WWW\application\admin\view\public\footer.html";i:1521443164;}*/ ?>
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="Bookmark" href="favicon.ico" >
+    <link rel="Shortcut Icon" href="favicon.ico" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/static/admin/lib/html5.js"></script>
+    <script type="text/javascript" src="/static/admin/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/static/admin/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/admin/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="/static/admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/static/admin/h-ui.admin/skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="/static/admin/h-ui.admin/css/style.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!--/meta 作为公共模版分离出去-->
 
 <title>添加管理员</title>
 <meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
@@ -11,9 +36,9 @@
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所属用户组：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
 				<select class="select" name="group_id" size="1">
-					{foreach name="authGroupRes" id="vo"}
-					<option  {if condition="$groupId eq $vo['id']"} selected="selected" {/if} value="{$vo.id}">{$vo.title}</option>
-					{/foreach}
+					<?php if(is_array($authGroupRes) || $authGroupRes instanceof \think\Collection || $authGroupRes instanceof \think\Paginator): if( count($authGroupRes)==0 ) : echo "" ;else: foreach($authGroupRes as $key=>$vo): ?>
+					<option  <?php if($groupId == $vo['id']): ?> selected="selected" <?php endif; ?> value="<?php echo $vo['id']; ?>"><?php echo $vo['title']; ?></option>
+					<?php endforeach; endif; else: echo "" ;endif; ?>
 				</select>
 				</span>
 			</div>
@@ -21,7 +46,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>管理员：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text"   class="input-text" value="{$lis.adminname}" placeholder="" id="adminname" name="adminname" {if condition="$lis.id eq 1"}disabled{/if}>
+				<input type="text"   class="input-text" value="<?php echo $lis['adminname']; ?>" placeholder="" id="adminname" name="adminname" <?php if($lis['id'] == 1): ?>disabled<?php endif; ?>>
 				<div id="ad"></div>
 			</div>
 		</div>
@@ -38,12 +63,12 @@
 
 			</div>
 		</div>
-		{if condition="$lis.id gt 2" }
+		<?php if($lis['id'] > 2): ?>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态</label>
 			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
 
-				{if condition="$lis.status eq 1"}
+				<?php if($lis['status'] == 1): ?>
 				<div class="radio-box">
 					<input  type="radio" id="sex-1"  name="status"   value="1"   checked >
 					<label for="sex-1">启动</label>
@@ -52,7 +77,7 @@
 					<input  type="radio" id="sex-2" name="status"  value="2"    >
 					<label for="sex-2">禁用</label>
 				</div>
-				{else /}
+				<?php else: ?>
 				<div class="radio-box">
 					<input  type="radio" id="sex-2" name="status"  value="1"  >
 					<label for="sex-2">启动</label>
@@ -61,10 +86,10 @@
 					<input  type="radio" id="sex-2" name="status"  value="2"   checked >
 					<label for="sex-2">禁用</label>
 				</div>
-				{/if}
+				<?php endif; ?>
 			</div>
 		</div>
-		{/if}
+		<?php endif; ?>
 
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
@@ -75,12 +100,17 @@
 	</form>
 </article>
 
-{include file="public/footer"/}
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/static/admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/static/admin/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="/static/admin/h-ui.admin/js/H-ui.admin.page.js"></script>
+<!--/_footer /作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="__STATIC__/admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
-<script type="text/javascript" src="__STATIC__/admin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
-<script type="text/javascript" src="__STATIC__/admin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="/static/admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/admin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/admin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 
 <script type="text/javascript">
     $(function(){
